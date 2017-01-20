@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IR.Quote.Pages.EquipmentItemsPage"
+             x:Name="MyItemsPage"
+             Title="{Binding Title}">
+  <StackLayout Orientation="Vertical">
+    <SearchBar x:Name="EquipmentSearchBar"
+               Placeholder="Search"
+               SearchButtonPressed="OnSearchButtonPressed"/>
+    <StackLayout Orientation="Horizontal">
+      <Label Text="{Binding CustomerName, StringFormat='Rates shown for {0}'}" FontSize="Small" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+      <Switch HorizontalOptions="End" Scale="0.7"></Switch>
+    </StackLayout>
+    <ListView ItemsSource="{Binding Items}"
+              SelectedItem="{Binding SelectedItem}"
+              HasUnevenRows="True">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <StackLayout Orientation="Vertical" VerticalOptions="Center" Padding="10,5,10,5">
+              <!-- name with disclosure indicator -->
+              <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium" LineBreakMode="TailTruncation"/>
+              <StackLayout Orientation="Horizontal">
+                <Grid HorizontalOptions="FillAndExpand">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                  </Grid.ColumnDefinitions>
+                  <Label Grid.Row="0" Grid.Column="0" Text="BOOK" FontSize="8"/>
+                  <Label Grid.Row="0" Grid.Column="1" Text="{Binding BookVal1}" FontSize="8"/>
+                  <Label Grid.Row="0" Grid.Column="2" Text="{Binding BookVal2}" FontSize="8"/>
+                  <Label Grid.Row="0" Grid.Column="3" Text="{Binding BookVal3}" FontSize="8"/>
+                  <Label Grid.Row="1" Grid.Column="0" Text="MRKT" FontSize="8"/>
+                  <Label Grid.Row="1" Grid.Column="1" Text="{Binding MarketVal1}" FontSize="8"/>
+                  <Label Grid.Row="1" Grid.Column="2" Text="{Binding MarketVal2}" FontSize="8"/>
+                  <Label Grid.Row="1" Grid.Column="3" Text="{Binding MarketVal3}" FontSize="8"/>
+                  <Label Grid.Row="2" Grid.Column="0" Text="FLOOR" FontSize="8"/>
+                  <Label Grid.Row="2" Grid.Column="1" Text="{Binding FloorVal1}" FontSize="8"/>
+                  <Label Grid.Row="2" Grid.Column="2" Text="{Binding FloorVal2}" FontSize="8"/>
+                  <Label Grid.Row="2" Grid.Column="3" Text="{Binding FloorVal3}" FontSize="8"/>
+                </Grid>
+                <StackLayout Orientation="Vertical" HorizontalOptions="End">
+                  <Label Text="{Binding Available, StringFormat='{0} available'}" HorizontalOptions="End" FontSize="8"/>
+                  <Button Text="ADD"
+                          HorizontalOptions="End"
+                          WidthRequest="80"
+                          HeightRequest="20"
+                          BackgroundColor="Gray" 
+                          TextColor="White" 
+                          Command="{Binding Path=BindingContext.AddItemCommand, Source={x:Reference Name=MyItemsPage}}"
+                          CommandParameter="{Binding Id}"/>
+                </StackLayout>
+              </StackLayout>
+            </StackLayout>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </StackLayout>
+</ContentPage>
